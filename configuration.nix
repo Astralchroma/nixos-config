@@ -30,7 +30,7 @@
 			persistent = true;
 			flake = inputs.self.outPath;
 			operation = "switch";
-			flags = [ "--upgrade-all" "--verbose" "-L" ];
+			flags = [ "--upgrade-all" "--recreate-lock-file" "--verbose" "-L" ];
 			dates = "00:00";
 		};
 	};
