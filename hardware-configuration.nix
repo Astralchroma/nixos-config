@@ -46,10 +46,10 @@
 			fsType = "vfat";
 		};
 
-		"/boot5" = {
-			device = "/dev/disk/by-uuid/B587-2704";
-			fsType = "vfat";
-		};
+#		"/boot5" = {
+#			device = "/dev/disk/by-uuid/B587-2704";
+#			fsType = "vfat";
+#		};
 	};
 
 	boot.loader.grub = {
@@ -72,10 +72,10 @@
 				devices = [ "/dev/disk/by-uuid/6359-0142" ];
 				path = "/boot4";
 			}
-			{
-				devices = [ "/dev/disk/by-uuid/B587-2704" ];
-				path = "/boot5";
-			}
+#			{
+#				devices = [ "/dev/disk/by-uuid/B587-2704" ];
+#				path = "/boot5";
+#			}
 		];
 	};
 
