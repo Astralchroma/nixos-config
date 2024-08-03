@@ -93,7 +93,7 @@
 	# networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
 
 	networking.interfaces.enp7s0.ipv4.addresses = [{
-		address = "192.168.2.10";
+		address = "192.168.2.1";
 		prefixLength = 16;
 	}];
 
