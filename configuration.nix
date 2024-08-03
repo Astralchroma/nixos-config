@@ -130,7 +130,6 @@
 		steam.enable = true;
 		gnupg.agent.enable = true;
 		hyprland.enable = true;
-		thunar.enable = true;
 		wireshark.enable = true;
 	};
 
@@ -143,11 +142,12 @@
 		isNormalUser = true;
 		extraGroups = [ "wheel" "wireshark" ];
 		packages = with pkgs; with config.nur.repos; [
-			ags btop devenv direnv dunst fastfetch fd ffmpeg_7-full filezilla firefox gamemode gamescope gimp git
-			git-of-theseus heroic hyprshot inkscape iuricarras.truckersmp-cli kdePackages.kdenlive kitty libreoffice
-			lua53Packages.tl mangohud ncdu nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng
-			pavucontrol playerctl prismlauncher rclone rsync smartmontools swaylock unzip usbutils vesktop vlc vmtouch
-			wget wine wine64 wireshark-qt wofi zip
+			ags btop devenv direnv dunst fastfetch fd ffmpeg_7-full filezilla firefox gamemode
+			gamescope gimp git git-of-theseus heroic hyprshot inkscape iuricarras.truckersmp-cli
+			kdePackages.kdenlive kitty libreoffice lua53Packages.tl mangohud nautilus ncdu
+			nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng
+			pavucontrol playerctl prismlauncher rclone rsync smartmontools swaylock unzip usbutils
+			vesktop vlc vmtouch wget winetricks wine64 wireshark-qt wofi zip
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
