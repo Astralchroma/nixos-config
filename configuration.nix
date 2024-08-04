@@ -124,6 +124,7 @@
 		blueman.enable = true;
 
 		gnome.gnome-keyring.enable = true;
+		envfs.enable = true;
 	};
 
 	programs = { 
