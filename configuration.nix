@@ -47,7 +47,7 @@
 	};
 
 	hardware = {
-		opengl.extraPackages = [ pkgs.libGL ];
+		graphics.extraPackages = [ pkgs.libGL ];
 
 		bluetooth = {
 			enable = true;
