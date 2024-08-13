@@ -147,7 +147,7 @@
 			kdePackages.kdenlive kitty libreoffice lua53Packages.tl mangohud nautilus ncdu
 			nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng
 			pavucontrol playerctl prismlauncher rclone rsync smartmontools swaylock unzip usbutils
-			vesktop vlc vmtouch wget winetricks wine64 wireshark-qt wofi zip
+			vesktop vlc vmtouch wget winetricks wine wine64 wireshark-qt wofi zip
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
