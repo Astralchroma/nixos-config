@@ -43,7 +43,6 @@
 
 	boot = {
 		kernelPackages = pkgs.linuxPackages_zen;
-		swraid.enable = true;
 	};
 
 	hardware = {

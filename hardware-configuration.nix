@@ -3,53 +3,38 @@
 
 	fileSystems = {
 		"/" = {
-			device = "/dev/disk/by-uuid/3a004f86-d2f7-4b5c-af71-89e07171c4db";
+			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
 			fsType = "btrfs";
 			options = [ "compress=zstd:15" ];
 		};
 
 		"/media/Archive" = {
-			device = "/dev/disk/by-uuid/3a004f86-d2f7-4b5c-af71-89e07171c4db";
+			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
 			fsType = "btrfs";
 			options = [ "subvol=/Archive" ];
 		};
 
 		"/media/Data" = {
-			device = "/dev/disk/by-uuid/3a004f86-d2f7-4b5c-af71-89e07171c4db";
+			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
 			fsType = "btrfs";
 			options = [ "subvol=/Data" ];
 		};
 
 		"/media/Library" = {
-			device = "/dev/disk/by-uuid/3a004f86-d2f7-4b5c-af71-89e07171c4db";
+			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
 			fsType = "btrfs";
 			options = [ "subvol=/Library" ];
 		};
 
 		"/boot" = {
-			device = "/dev/disk/by-uuid/868F-0170";
+			device = "/dev/disk/by-uuid/8292-4648";
 			fsType = "vfat";
 		};
 
 		"/boot2" = {
-			device = "/dev/disk/by-uuid/C49B-DBA8";
+			device = "/dev/disk/by-uuid/8236-8023";
 			fsType = "vfat";
 		};
-
-		"/boot3" = {
-			device = "/dev/disk/by-uuid/3D62-7570";
-			fsType = "vfat";
-		};
-
-		"/boot4" = {
-			device = "/dev/disk/by-uuid/6359-0142";
-			fsType = "vfat";
-		};
-
-#		"/boot5" = {
-#			device = "/dev/disk/by-uuid/B587-2704";
-#			fsType = "vfat";
-#		};
 	};
 
 	boot.loader.grub = {
@@ -61,31 +46,36 @@
 
 		mirroredBoots = [
 			{
-				devices = [ "/dev/disk/by-uuid/C49B-DBA8" ];
+				devices = [ "/dev/disk/by-uuid/8236-8023" ];
 				path = "/boot2";
 			}
-			{
-				devices = [ "/dev/disk/by-uuid/3D62-7570" ];
-				path = "/boot3";
-			}
-			{
-				devices = [ "/dev/disk/by-uuid/6359-0142" ];
-				path = "/boot4";
-			}
-#			{
-#				devices = [ "/dev/disk/by-uuid/B587-2704" ];
-#				path = "/boot5";
-#			}
 		];
 	};
 
-	boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-	boot.initrd.kernelModules = [ ];
+	boot.bcache.enable = true;
+	boot.swraid.enable = true;
+	
+	boot.initrd.services.bcache.enable = true;
 
-	boot.kernelModules = [ "kvm-amd" ];
+	boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "bcache" ];
+	boot.initrd.kernelModules = [ "bcache" ];
+	
+	boot.initrd.systemd.emergencyAccess = true;
+	boot.initrd.systemd.enable = true;
+
+	boot.initrd.systemd.services.mdadm = {
+		enable = true;
+		wantedBy = [ "basic.target" ];
+		serviceConfig = {
+			Type = "oneshot";
+			ExecStart = "/bin/mdadm --assemble --scan";
+		};
+	};
+
+	boot.kernelModules = [ "kvm-amd" "bcache" ];
 	boot.extraModulePackages = [ ];
 
-	boot.swraid.mdadmConf = "PROGRAM /etc/nixos/webhook";
+	# boot.swraid.mdadmConf = "PROGRAM /etc/nixos/webhook";
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 	# (the default) this is the recommended approach. When using systemd-networkd it's
