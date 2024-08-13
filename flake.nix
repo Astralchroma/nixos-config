@@ -9,7 +9,13 @@
 		nixosConfigurations.horizon = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };
-			modules = [ nur.nixosModules.nur ./configuration.nix ];
+			modules = [ nur.nixosModules.nur ./horizon.nix ];
+		};
+
+		nixosConfigurations.outpost = nixpkgs.lib.nixosSystem {
+			system = "aarch64-linux";
+			specialArgs = { inherit inputs; };
+			modules = [ ./outpost.nix ];
 		};
 	};
 }

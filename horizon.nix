@@ -7,7 +7,7 @@
 		})
 	];
 
-	imports = [ ./hardware-configuration.nix ];
+	imports = [ ./horizon-hardware.nix ];
 
 	nix.settings = {
 		auto-optimise-store = true;
