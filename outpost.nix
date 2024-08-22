@@ -1,33 +1,11 @@
 { inputs, modulesPath, pkgs, ... }: let
 	values = builtins.fromJSON (builtins.readFile ./values.json);
 in {
-	nixpkgs.config.allowUnfree = true;
-
 	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-	nix = {
-		settings = {
-			auto-optimise-store = true;
-			experimental-features = [ "nix-command" "flakes" ];
-			trusted-users = [ "@wheel" ];
-		};
+	system.stateVersion = "24.11";
 
-		gc = {
-			automatic = true;
-			dates = "00:00";
-			options = "--delete-older-than 30d";
-		};
-	};
-
-	boot = {
-		initrd.availableKernelModules = [ "xhci_pci" "virtio_scsi" ];
-
-		loader.grub = {
-			device = "nodev";
-			efiSupport = true;
-			efiInstallAsRemovable = true;
-		};
-	};
+	boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_scsi" ];
 
 	fileSystems = {
 		"/" = {
@@ -42,39 +20,12 @@ in {
 		};
 	};
 
-	system = {
-		stateVersion = "24.11";
-
-		autoUpgrade = {
-			enable = true;
-			flake = inputs.self.outPath;
-			flags = [ "--upgrade-all" "--recreate-lock-file" "--verbose" "-L" ];
-			dates = "00:00";
-		};
-	};
-
 	networking = {
 		hostName = "outpost";
-		nameservers = [ "1.1.1.1" "8.8.8.8" ];
 		useDHCP = true;
 	};
 
-	services.openssh = {
-		enable = true;
-		settings = {
-			PermitRootLogin = "no";
-			PasswordAuthentication = false;
-			KbdInteractiveAuthentication = false;
-		};
-	};
-
-	users.users.emily = {
-		isNormalUser = true;
-		extraGroups = [ "wheel" ];
-		packages = with pkgs; [
-			btop devenv direnv fastfetch fd git mongosh ncdu rclone rsync smartmontools unzip vmtouch wget zip
-		];
-	};
+	users.users.emily.packages = [ pkgs.mongosh ];
 
 	virtualisation = {
 		containers.enable = true;
@@ -123,9 +74,4 @@ in {
 			};
 		};
 	};
-
-	time.timeZone = "Europe/London";
-	i18n.defaultLocale = "en_GB.UTF-8";
-	console.keyMap = "uk";
-	documentation.nixos.enable = false;
 }
