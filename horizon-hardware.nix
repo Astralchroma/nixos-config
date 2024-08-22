@@ -74,6 +74,7 @@
 
 	boot.kernelModules = [ "kvm-amd" "bcache" ];
 	boot.extraModulePackages = [ ];
+	boot.kernelParams = [ "libahci.ignore_sss=1" ];
 
 	# boot.swraid.mdadmConf = "PROGRAM /etc/nixos/webhook";
 
