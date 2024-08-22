@@ -63,15 +63,6 @@
 	boot.initrd.systemd.emergencyAccess = true;
 	boot.initrd.systemd.enable = true;
 
-	boot.initrd.systemd.services.mdadm = {
-		enable = true;
-		wantedBy = [ "basic.target" ];
-		serviceConfig = {
-			Type = "oneshot";
-			ExecStart = "/bin/mdadm --assemble --scan";
-		};
-	};
-
 	boot.kernelModules = [ "kvm-amd" "bcache" ];
 	boot.extraModulePackages = [ ];
 	boot.kernelParams = [ "libahci.ignore_sss=1" ];
