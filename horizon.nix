@@ -45,6 +45,9 @@
 		kernelPackages = pkgs.linuxPackages_zen;
 	};
 
+	xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+	xdg.portal.config.common.default = "gtk";
+
 	hardware = {
 		graphics.extraPackages = [ pkgs.libGL ];
 
@@ -124,6 +127,7 @@
 
 		gnome.gnome-keyring.enable = true;
 		envfs.enable = true;
+		flatpak.enable = true;
 	};
 
 	programs = { 
