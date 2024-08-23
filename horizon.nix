@@ -87,6 +87,8 @@
 			address = "192.168.2.1";
 			prefixLength = 16;
 		}];
+
+		firewall.allowedTCPPorts = [ 8096 ];
 	};
 
 	services = {
@@ -108,7 +110,6 @@
 					}
 				'')
 			];
-
 		};
 
 		displayManager.sddm = {
@@ -137,10 +138,10 @@
 		};
 
 		blueman.enable = true;
-
-		gnome.gnome-keyring.enable = true;
 		envfs.enable = true;
 		flatpak.enable = true;
+		gnome.gnome-keyring.enable = true;
+		jellyfin.enable = true;
 	};
 
 	security.rtkit.enable = true;
