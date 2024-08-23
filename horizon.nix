@@ -150,7 +150,6 @@
 		steam.enable = true;
 		gnupg.agent.enable = true;
 		hyprland.enable = true;
-		wireshark.enable = true;
 	};
 
 	xdg.portal = {
@@ -165,12 +164,10 @@
 	};
 
 	users.users.emily = {
-		extraGroups = [ "wireshark" ];
 		packages = with pkgs; with config.nur.repos; [
-			ags dunst ffmpeg_7-full filezilla firefox gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape
-			iuricarras.truckersmp-cli kdePackages.kdenlive kitty libreoffice lua53Packages.tl mangohud nautilus
-			nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng pavucontrol playerctl
-			prismlauncher swaylock usbutils vesktop vlc winetricks wine wine64 wireshark-qt wofi xorg.xcursorthemes
+			ags dunst firefox gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty libreoffice mangohud
+			nautilus nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng pavucontrol playerctl
+			prismlauncher swaylock vesktop vlc winetricks wine wine64 wofi xorg.xcursorthemes
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
