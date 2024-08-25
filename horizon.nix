@@ -142,6 +142,7 @@
 		flatpak.enable = true;
 		gnome.gnome-keyring.enable = true;
 		jellyfin.enable = true;
+		tailscale.enable = true;
 	};
 
 	security.rtkit.enable = true;

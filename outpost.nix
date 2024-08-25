@@ -25,6 +25,8 @@ in {
 		useDHCP = true;
 	};
 
+	services.tailscale.enable = true;
+
 	users.users.emily.packages = [ pkgs.mongosh ];
 
 	virtualisation = {
@@ -71,6 +73,12 @@ in {
 				};
 				volumes = [ "/srv/aggregator:/srv" ];
 				cmd = [ "java" "-jar" "/srv/build/libs/Aggregator-1.4.1-all.jar" ];
+			};
+
+			headscale = {
+				image = "headscale/headscale:0.22.3";
+				volumes = [ "/srv/headscale:/etc/headscale" ];
+				cmd = [ "headscale" "serve" ];
 			};
 		};
 	};
