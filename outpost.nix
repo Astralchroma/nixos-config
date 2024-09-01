@@ -1,6 +1,4 @@
-{ inputs, modulesPath, pkgs, ... }: let
-	values = builtins.fromJSON (builtins.readFile ./values.json);
-in {
+{ config, inputs, modulesPath, pkgs, ... }: {
 	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
 	system.stateVersion = "24.11";
@@ -53,6 +51,10 @@ in {
 		};
 	};
 
+	age.secrets.aggregator_discord_token = {
+		file = ./secrets/aggregator_discord_token.age;
+	};
+
 	containers.aggregator = {
 		autoStart = true;
 
@@ -60,6 +62,9 @@ in {
 			"/srv" = {
 				hostPath = "/srv/aggregator";
 				isReadOnly = false;
+			};
+			"${config.age.secrets.aggregator_discord_token.path}" = {
+				isReadOnly = true;
 			};
 		};
 
@@ -72,11 +77,10 @@ in {
 				enable = true;
 				description = "Aggregator";
 				unitConfig.Type = "simple";
-				serviceConfig.ExecStart = "${pkgs.jdk17}/bin/java -jar /srv/build/libs/Aggregator-1.4.1-all.jar";
+				script = ''DISCORD_TOKEN=$(cat "${config.age.secrets.aggregator_discord_token.path}") ${pkgs.jdk17}/bin/java -jar /srv/build/libs/Aggregator-1.4.1-all.jar'';
 				wantedBy = [ "multi-user.target" ];
 				environment = {
-					DISCORD_TOKEN = values.discord_token;
-					MONGO_URI = values.mongo_uri;
+					MONGO_URI = "mongodb://localhost";
 					MONGO_DATABASE = "aggregator";
 					OWNER_SNOWFLAKE = "521031433972744193";
 				};

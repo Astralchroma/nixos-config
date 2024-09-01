@@ -23,6 +23,7 @@
 			modules = [
 				./defaults.nix
 				./outpost.nix
+				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
 		};
