@@ -142,6 +142,7 @@
 		flatpak.enable = true;
 		gnome.gnome-keyring.enable = true;
 		jellyfin.enable = true;
+		pcscd.enable = true;
 		tailscale.enable = true;
 	};
 
@@ -168,7 +169,7 @@
 		packages = with pkgs; with config.nur.repos; [
 			ags aseprite dunst firefox gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty libreoffice
 			mangohud nautilus nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng pavucontrol
-			playerctl prismlauncher swaylock vesktop vlc winetricks wine wine64 wofi xorg.xcursorthemes
+			playerctl prismlauncher swaylock vesktop vlc winetricks wine wine64 wofi xorg.xcursorthemes yubikey-manager
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
