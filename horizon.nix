@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{ config, inputs, lib, modulesPath, pkgs, ... }: {
 	nixpkgs.overlays = [
 		(self: super: {
 			git-of-theseus = super.callPackage ./git-of-theseus.nix {};
@@ -163,6 +163,33 @@
 	fonts = {
 		packages = with pkgs; [ corefonts jetbrains-mono vistafonts ];
 		fontconfig.defaultFonts.monospace = [ "Jetbrains Mono" ];
+	};
+
+	environment.systemPackages = [
+		inputs.agenix.packages."${pkgs.system}".default
+		pkgs.rclone
+	];
+
+	age.secrets.rclone = {
+		file = ./secrets/rclone.conf.age;
+	};
+
+	systemd.services.rclone = {
+		enable = true;
+		requires = [ "media-Data.mount" ];
+		serviceConfig = {
+			Type = "oneshot";
+			ExecStart = "${pkgs.rclone}/bin/rclone --config ${config.age.secrets.rclone.path} sync --copy-links --order-by size,descending --delete-during --track-renames --verbose --delete-excluded --exclude-from /media/Data/.excluded --fast-list /media/Data backblaze:astralchroma-horizon";
+		};
+	};
+
+	systemd.timers.rclone = {
+		enable = true;
+		wantedBy = [ "timers.target" ];
+		timerConfig = {
+			OnCalendar = "hourly";
+			Persisent = true;
+		};
 	};
 
 	users.users.emily = {
