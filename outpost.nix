@@ -164,7 +164,16 @@
 		};
 	};
 
-	services.tailscale.enable = true;
+	services = {
+		tailscale.enable = true;
+
+		postgresql = {
+			enable = true;
+			package = pkgs.postgresql_16;
+			dataDir = "/srv/postgresql16";
+			authentication = "local all emily peer";
+		};
+	};
 
 	users.users.emily.packages = [ pkgs.mongosh ];
 }
