@@ -1,6 +1,4 @@
-{ lib, python3Packages, fetchFromGitHub }:
-
-python3Packages.buildPythonApplication rec {
+{ lib, python3Packages, fetchFromGitHub }: python3Packages.buildPythonApplication rec {
 	pname = "git-of-theseus";
 	version = "0.3.4";
 	pyproject = true;

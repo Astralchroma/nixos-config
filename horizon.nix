@@ -1,7 +1,7 @@
 { config, inputs, lib, modulesPath, pkgs, ... }: {
 	nixpkgs.overlays = [
 		(self: super: {
-			git-of-theseus = super.callPackage ./git-of-theseus.nix {};
+			git-of-theseus = super.callPackage ./packages/git-of-theseus.nix {};
 		})
 	];
 

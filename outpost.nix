@@ -1,4 +1,10 @@
 { config, inputs, modulesPath, pkgs, ... }: {
+	nixpkgs.overlays = [
+		(self: super: {
+			autochroma = super.callPackage ./packages/autochroma.nix {};
+		})
+	];
+
 	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
 	system.stateVersion = "24.11";
@@ -172,6 +178,63 @@
 			package = pkgs.postgresql_16;
 			dataDir = "/srv/postgresql16";
 			authentication = "local all emily peer";
+		};
+	};
+
+	age.secrets.autochromaDiscordToken = {
+		file = ./secrets/autochroma-discord_token.age;
+		owner = "autochroma";
+		group = "autochroma";
+	};
+
+	age.secrets.autochromaDatabaseUri = {
+		file = ./secrets/autochroma-database_uri.age;
+		owner = "autochroma";
+		group = "autochroma";
+	};
+
+	users.users.autochroma = { isSystemUser = true; name = "autochroma"; group = "autochroma"; };
+	users.groups.autochroma = {};
+
+	systemd.services.autochroma = {
+		description = "Autochroma Discord Bot";
+
+		after = [ "postgresql.service" ];
+		requires = [ "postgresql.service" ];
+
+		serviceConfig = with config.age.secrets; {
+			User = "autochroma";
+			Group = "autochroma";
+
+			Type = "exec";
+			ExecStart = "${pkgs.autochroma}/bin/autochroma --discord-token-file ${autochromaDiscordToken.path} --database-uri-file ${autochromaDatabaseUri.path}";
+
+			CapabilityBoundingSet = "";
+			LockPersonality = true;
+			MemoryDenyWriteExecute = true;
+			NoNewPrivileges = true;
+			PrivateDevices = true;
+			PrivateMounts = true;
+			PrivateTmp = true;
+			PrivateUsers = true;
+			ProcSubset = "pid";
+			ProtectClock = true;
+			ProtectControlGroups = true;
+			ProtectHome = true;
+			ProtectHostname = true;
+			ProtectKernelLogs = true;
+			ProtectKernelModules = true;
+			ProtectKernelTunables = true;
+			ProtectProc = "invisible";
+			ProtectSystem = "strict";
+			RemoveIPC = true;
+			RestrictAddressFamilies = "AF_UNIX AF_INET AF_INET6";
+			RestrictNamespaces = true;
+			RestrictRealtime = true;
+			RestrictSUIDSGID = true;
+			SystemCallArchitectures = "native";
+			SystemCallFilter = "@basic-io @file-system @io-event @network-io @process @signal ioctl madvise";
+			UMask = "777";
 		};
 	};
 
