@@ -34,12 +34,15 @@
 		kernelModules = [ "kvm-amd" "bcache" ];
 		kernelParams = [ "libahci.ignore_sss=1" ];
 		
-		loader.grub.mirroredBoots = [
-			{
-				devices = [ "/dev/disk/by-uuid/8236-8023" ];
-				path = "/boot2";
-			}
-		];
+		loader.systemd-boot.extraInstallCommands = ''
+			if ${pkgs.util-linux}/bin/mountpoint -q /boot2
+			then
+				printf "\033[1;34mMirroring /boot to /boot2. EFI System Partition will be redundant!\n"
+				${pkgs.rsync}/bin/rsync -aUH --delete-after /boot/ /boot2/
+			else
+				printf "\033[1;31mMountpoint /boot2 does not exist! EFI System Partition will not be redundant!\n"
+			fi
+		'';
 	};
 
 	fileSystems = {

@@ -21,12 +21,7 @@
 	};
 
 	boot = {
-		loader.grub = {
-			device = "nodev";
-			efiSupport = true;
-			efiInstallAsRemovable = true;
-		};
-
+		loader.systemd-boot.enable = true;
 		initrd.systemd.enable = true;
 	};
 
