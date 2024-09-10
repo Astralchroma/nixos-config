@@ -24,50 +24,51 @@
 
 	boot = {
 		swraid.enable = true;
-		bcache.enable = true;
 
-		initrd.services.bcache.enable = true;
-		initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "bcache" ];
-		initrd.kernelModules = [ "bcache" ];
+		initrd = {
+			availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+			kernelModules = [ "dm_cache_default" ];
+
+			luks.devices.horizon-decrypted.allowDiscards = true;
+		};
 
 		kernelPackages = pkgs.linuxPackages_zen;
-		kernelModules = [ "kvm-amd" "bcache" ];
+		kernelModules = [ "kvm-amd" ];
 		kernelParams = [ "libahci.ignore_sss=1" ];
 		
 		loader.systemd-boot.extraInstallCommands = ''
 			if ${pkgs.util-linux}/bin/mountpoint -q /boot2
 			then
-				printf "\033[1;34mMirroring /boot to /boot2. EFI System Partition will be redundant!\n"
+				printf "\033[1;34mMirroring /boot to /boot2. EFI System Partition will be redundant!\033[0m\n"
 				${pkgs.rsync}/bin/rsync -aUH --delete-after /boot/ /boot2/
 			else
-				printf "\033[1;31mMountpoint /boot2 does not exist! EFI System Partition will not be redundant!\n"
+				printf "\033[1;31mMountpoint /boot2 does not exist! EFI System Partition will not be redundant!\033[0m\n"
 			fi
 		'';
 	};
 
 	fileSystems = {
 		"/" = {
-			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
+			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
 			fsType = "btrfs";
 			options = [ "compress=zstd:15" ];
-		};
-
-		"/media/Archive" = {
-			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
-			fsType = "btrfs";
-			options = [ "subvol=/Archive" ];
+			encrypted = {
+				label = "horizon-decrypted";
+				enable = true;
+				blkDev = "/dev/disk/by-uuid/f5c01197-f3cf-415e-a41f-85397a445bd4";
+			};
 		};
 
 		"/media/Data" = {
-			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
+			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
 			fsType = "btrfs";
-			options = [ "subvol=/Data" ];
+			options = [ "subvol=/data" ];
 		};
 
 		"/media/Library" = {
-			device = "/dev/disk/by-uuid/82f96cc5-08c4-4303-85c6-322aef0eeed6";
+			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
 			fsType = "btrfs";
-			options = [ "subvol=/Library" ];
+			options = [ "subvol=/library" ];
 		};
 
 		"/boot" = {
@@ -140,6 +141,7 @@
 			};
 		};
 
+		lvm.boot.thin.enable = true;
 		blueman.enable = true;
 		envfs.enable = true;
 		flatpak.enable = true;
