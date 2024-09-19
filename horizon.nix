@@ -199,9 +199,41 @@
 
 	users.users.emily = {
 		packages = with pkgs; with config.nur.repos; [
-			ags aseprite dunst firefox gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty libreoffice
-			mangohud nautilus nltch.spotify-adblock nvtopPackages.amd obs-studio obsidian onefetch oxipng pavucontrol
-			playerctl prismlauncher swaylock vesktop vlc winetricks wine wine64 wofi xorg.xcursorthemes yubikey-manager
+			ags
+			aseprite
+			dunst
+			firefox
+			gamemode
+			gamescope
+			gimp
+			git-of-theseus
+			heroic
+			hyprshot
+			inkscape
+			kitty
+			libreoffice
+			mangohud
+			nautilus
+			nltch.spotify-adblock
+			nvtopPackages.amd
+			obs-studio
+			obsidian
+			onefetch
+			oxipng
+			pavucontrol
+			playerctl
+			prismlauncher
+			qoi
+			renderdoc
+			swaylock
+			vesktop
+			vlc
+			wine
+			wine64
+			winetricks
+			wofi
+			xorg.xcursorthemes
+			yubikey-manager
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
@@ -216,12 +248,6 @@
 						publisher = "PolyMeilex";
 						version = "0.1.17";
 						sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
-					}
-					{
-						name = "discord-vscode";
-						publisher = "icrawl";
-						version = "5.8.0";
-						sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
 					}
 					{
 						name = "vscode-teal";
