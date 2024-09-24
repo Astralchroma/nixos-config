@@ -249,12 +249,6 @@
 						version = "0.1.17";
 						sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
 					}
-					{
-						name = "vscode-teal";
-						publisher = "pdesaulniers";
-						version = "0.9.0";
-						sha256 = "sha256-eMKdG5rFUPzRTm2dzRFpMnhugd52UjxHW1hhpnZqErA=";
-					}
 				];
 			})
 		];
