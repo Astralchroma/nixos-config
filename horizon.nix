@@ -7,7 +7,11 @@
 
 	imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-	system.stateVersion = "24.05";
+	system = {
+		stateVersion = "24.05";
+
+		autoUpgrade.flags = [ "--flake" "/media/Data/NixOS" ];
+	};
 
 	hardware = {
 		graphics.extraPackages = [ pkgs.libGL ];
