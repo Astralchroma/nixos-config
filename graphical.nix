@@ -114,10 +114,11 @@
 			(vscode-with-extensions.override {
 				vscode = vscodium;
 				vscodeExtensions = with vscode-extensions; [
-					rust-lang.rust-analyzer
-					tamasfe.even-better-toml
 					jnoortheen.nix-ide
 					mkhl.direnv
+					rust-lang.rust-analyzer
+					tamasfe.even-better-toml
+					vadimcn.vscode-lldb
 				] ++ vscode-utils.extensionsFromVscodeMarketplace [
 					{
 						name = "wgsl";
