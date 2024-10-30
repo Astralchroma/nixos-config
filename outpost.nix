@@ -160,9 +160,8 @@
 				enable = true;
 
 				settings = {
-					server_url = "https://tailscale.astralchroma.dev/";
-					db_path = "/srv/db.sqlite";
-					private_key_path = "/srv/private.key";
+					database.sqlite.path = "/srv/db.sqlite";
+					dns.base_domain = "tailscale.astralchroma.dev";
 					noise.private_key_path = "/srv/noise_private.key";
 				};
 			};
