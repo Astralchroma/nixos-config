@@ -203,6 +203,8 @@
 		after = [ "postgresql.service" ];
 		requires = [ "postgresql.service" ];
 
+		upheldBy = [ "multi-user.target" ];
+
 		serviceConfig = with config.age.secrets; {
 			User = "autochroma";
 			Group = "autochroma";
