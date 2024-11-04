@@ -9,7 +9,7 @@
 
 	nix.gc = {
 		automatic = true;
-		dates = "00:00";
+		dates = "09:15";
 		options = "--delete-older-than 14d";
 	};
 	
@@ -17,7 +17,7 @@
 		enable = true;
 		flake = inputs.self.outPath;
 		flags = [ "--upgrade-all" "--recreate-lock-file" "--verbose" "-L" ];
-		dates = "00:00";
+		dates = "08:15";
 	};
 
 	boot = {
