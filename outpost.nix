@@ -141,7 +141,8 @@
 				'';
 
 				# Fuck you cloudflare, let me use subsubdomains damn it
-				virtualHosts."https://axolotl_client-api.astralchroma.dev".extraConfig = ''
+				# Fuck you let's encrypt, let me use `_` damn it
+				virtualHosts."https://axolotlclient-api.astralchroma.dev".extraConfig = ''
 					reverse_proxy /dev http://localhost:8000
 				'';
 
