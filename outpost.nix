@@ -115,9 +115,7 @@
 				virtualHosts."https://astralchroma.dev".extraConfig = ''
 					@stripExtensions path_regexp strip (.*)\.(html)
 					redir @stripExtensions {re.strip.1} permanent
-
 					redir /index / permanent
-					header / Link "<fonts/exo_2-reduced.ttf>;rel=preload;as=font,<fonts/exo_2-italic-reduced.ttf>;rel=preload;as=font,<images/background.svg>;rel=reload;as=image,<images/avatar.png>;rel=preload;as=image,<images/github.svg>;rel=preload;as=image,<images/youtube.svg>;rel=preload;as=image,<images/mail.svg>;rel=preload;as=image,<images/code.svg>;rel=preload;as=image,<images/globe.svg>;rel=preload;as=image"
 
 					root * /srv/
 
