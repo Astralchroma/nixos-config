@@ -45,11 +45,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1731420290,
-        "narHash": "sha256-XQJhONNQOJECUGeW/4OK7Qj3uNmivm0SMedxC7BNin0=",
+        "lastModified": 1731429324,
+        "narHash": "sha256-BQcSEqSoiq6pGuYE9MvsLOS6xVrA8c1iAdVYj64aHhs=",
         "owner": "AxolotlClient",
         "repo": "AxolotlClient-API",
-        "rev": "204d9b555114ee8ca2a56060811d9234fe99d77b",
+        "rev": "4dca3d132062be5d754586934f493828f03f9e98",
         "type": "github"
       },
       "original": {
