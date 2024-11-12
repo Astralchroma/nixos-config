@@ -140,7 +140,8 @@
 					reverse_proxy http://100.64.0.1:8096
 				'';
 
-				virtualHosts."https://api.axolotlclient.astralchroma.dev".extraConfig = ''
+				# Fuck you cloudflare, let me use subsubdomains damn it
+				virtualHosts."https://axolotl_client-api.astralchroma.dev".extraConfig = ''
 					reverse_proxy /dev http://localhost:8000
 				'';
 
@@ -148,7 +149,8 @@
 					respond "Not Found" 404
 				'';
 
-				virtualHosts."https://api.solarscape.astralchroma.dev".extraConfig = ''
+				# Fuck you cloudflare, let me use subsubdomains damn it
+				virtualHosts."https://solarscape-api.astralchroma.dev".extraConfig = ''
 					respond "Not Found" 404
 				'';
 			};
