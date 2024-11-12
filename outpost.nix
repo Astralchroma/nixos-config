@@ -185,6 +185,12 @@
 		};
 	};
 
+	age.secrets.axolotlClientApiHypixelApiKey = {
+		file = ./secrets/axolotl_client-api-hypixel-api-key.age;
+		owner = "axolotl_client-api";
+		group = "axolotl_client-api";
+	};
+
 	services = {
 		tailscale.enable = true;
 
@@ -198,6 +204,7 @@
 		axolotlClientApi = {
 			enable = true;
 			postgresUrl = "postgres:///axolotl_client-api";
+			hypixelApiKeyFile = config.age.secrets.axolotlClientApiHypixelApiKey.path;
 		};
 	};
 
