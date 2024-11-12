@@ -139,6 +139,10 @@
 				virtualHosts."https://gateway.astralchroma.dev".extraConfig = ''
 					reverse_proxy http://100.64.0.1:8096
 				'';
+
+				virtualHosts."https://api.axolotlclient.astralchroma.dev".extraConfig = ''
+					reverse_proxy /dev http://localhost:8000
+				'';
 			};
 		};
 	};
