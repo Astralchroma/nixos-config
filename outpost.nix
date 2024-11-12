@@ -179,6 +179,11 @@
 			dataDir = "/srv/postgresql16";
 			authentication = "local all emily peer";
 		};
+
+		axolotlClientApi = {
+			enable = true;
+			postgresUrl = "postgres:///axolotl_client-api";
+		};
 	};
 
 	age.secrets.autochromaDiscordToken = {
