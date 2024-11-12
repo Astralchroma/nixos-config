@@ -63,10 +63,9 @@
 
 	users.users.emily = {
 		packages = with pkgs; with config.nur.repos; [
-			ags aseprite blockbench dunst firefox gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty
-			libreoffice mangohud nautilus nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol
-			playerctl prismlauncher qoi renderdoc swaylock vesktop vlc wine wine64 winetricks wofi xorg.xcursorthemes
-			yubikey-manager
+			ags aseprite blockbench dunst gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty libreoffice
+			librewolf mangohud nautilus nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol playerctl
+			prismlauncher qoi renderdoc swaylock vesktop vlc wine wine64 winetricks wofi xorg.xcursorthemes yubikey-manager
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
