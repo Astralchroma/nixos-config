@@ -143,6 +143,14 @@
 				virtualHosts."https://api.axolotlclient.astralchroma.dev".extraConfig = ''
 					reverse_proxy /dev http://localhost:8000
 				'';
+
+				virtualHosts."https://solarscape.astralchroma.dev".extraConfig = ''
+					respond "Not Found" 404
+				'';
+
+				virtualHosts."https://api.solarscape.astralchroma.dev".extraConfig = ''
+					respond "Not Found" 404
+				'';
 			};
 		};
 	};
