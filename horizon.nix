@@ -126,5 +126,5 @@
 		};
 	};
 
-	users.users.emily.packages = [ pkgs.nvtopPackages.amd ];
+	users.users.emily.packages = [ pkgs.nvtopPackages.amd config.nur.repos.iuricarras.truckersmp-cli ];
 }
