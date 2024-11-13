@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, lib, pkgs, ... }: {
 	nixpkgs.config.allowUnfree = true;
 
 	nix.settings = {
@@ -25,12 +25,16 @@
 		initrd.systemd.enable = true;
 	};
 
-	services.openssh = {
-		enable = true;
-		settings = {
-			PermitRootLogin = "no";
-			PasswordAuthentication = false;
-			KbdInteractiveAuthentication = false;
+	services = {
+		speechd.enable = lib.mkForce false; # Not blind, so don't need it lol
+
+		openssh = {
+			enable = true;
+			settings = {
+				PermitRootLogin = "no";
+				PasswordAuthentication = false;
+				KbdInteractiveAuthentication = false;
+			};
 		};
 	};
 
