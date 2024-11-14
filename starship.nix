@@ -37,5 +37,13 @@
 		}
 	];
 
-	networking.useDHCP = true;	
+	networking = {
+		useDHCP = true;
+
+		networkmanager.enable = true;
+	};
+
+	users.users.emily.extraGroups = [ "networkmanager" ];
+
+	programs.nm-applet.enable = true;
 }
