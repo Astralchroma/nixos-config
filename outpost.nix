@@ -117,6 +117,8 @@
 					redir @stripExtensions {re.strip.1} permanent
 					redir /index / permanent
 
+					redir /discord https://discord.gg/abSHWeTgPX permanent
+
 					root * /srv/
 
 					file_server {
@@ -147,6 +149,8 @@
 				'';
 
 				virtualHosts."https://solarscape.astralchroma.dev".extraConfig = ''
+					redir /discord https://astralchroma.dev/discord permanent
+
 					respond "Not Found" 404
 				'';
 
