@@ -151,6 +151,10 @@
 				virtualHosts."https://solarscape.astralchroma.dev".extraConfig = ''
 					redir /discord https://astralchroma.dev/discord permanent
 
+					redir / https://github.com/Astralchroma/Solarscape temporary
+					redir /index https://github.com/Astralchroma/Solarscape temporary
+					redir /index.html https://github.com/Astralchroma/Solarscape temporary
+
 					respond "Not Found" 404
 				'';
 
