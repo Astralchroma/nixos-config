@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ ... }: {
 	nix.settings.experimental-features = [ "flakes" ];
 
 	boot = {
@@ -21,9 +21,13 @@
 		};
 	};
 
+	documentation = {
+		man.enable = false;
+		nixos.enable = false; 
+	};
+
 	console.keyMap = "uk";
-	documentation.nixos.enable = false; 
-	environment.defaultPackages = lib.mkForce [];
+	environment.defaultPackages = [];
 	i18n.defaultLocale = "en_GB.UTF-8";
 	time.timeZone = "Europe/London";
 
