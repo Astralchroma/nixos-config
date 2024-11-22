@@ -24,9 +24,9 @@
 			system = "x86_64-linux";
 			modules = [
 				nur.nixosModules.nur
-				./global.nix
-				./graphical.nix
-				./starship.nix
+				machines/global.nix
+				machines/graphical.nix
+				machines/starship.nix
 				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
@@ -36,8 +36,8 @@
 			system = "aarch64-linux";
 			modules = [
 				axolotlClientApi.nixosModules.default
-				./global.nix
-				./outpost.nix
+				machines/global.nix
+				machines/outpost.nix
 				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
