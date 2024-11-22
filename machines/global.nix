@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
 	nix.settings.experimental-features = [ "flakes" ];
 
 	boot = {
@@ -20,6 +20,8 @@
 			PermitRootLogin = "no";
 		};
 	};
+
+	environment.defaultPackages = lib.mkForce [];
 
 	users.users.emily = {
 		isNormalUser = true;
