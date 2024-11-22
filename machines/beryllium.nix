@@ -10,6 +10,7 @@
 			device = "tmpfs";
 			fsType = "tmpfs";
 			options = [ "mode=755" ];
+			neededForBoot = true;
 		};
 
 		"/boot" = {
@@ -21,11 +22,13 @@
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
 			fsType = "btrfs";
 			options = [ "compress=lzo" "subvol=nix" ];
+			neededForBoot = true;
 		};
 
 		"/etc/persistent" = {
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
 			options = [ "subvol=etc/persistent" ];
+			neededForBoot = true;
 		};
 
 		"/etc/nixos" = {
