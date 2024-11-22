@@ -1,4 +1,6 @@
 { ... }: {
+	nix.settings.experimental-features = [ "flakes" ];
+
 	boot = {
 		loader.systemd-boot = {
 			enable = true;

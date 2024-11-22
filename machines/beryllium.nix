@@ -6,7 +6,11 @@
 	boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_scsi" ];
 
 	fileSystems = {
-		"/" = { device = "none"; fsType = "tmpfs"; };
+		"/" = {
+			device = "tmpfs";
+			fsType = "tmpfs";
+			options = [ "mode=755" ];
+		};
 
 		"/boot" = {
 			device = "/dev/disk/by-uuid/4C51-A2F3";
