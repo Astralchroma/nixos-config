@@ -21,7 +21,11 @@
 		};
 	};
 
+	console.keyMap = "uk";
+	documentation.nixos.enable = false; 
 	environment.defaultPackages = lib.mkForce [];
+	i18n.defaultLocale = "en_GB.UTF-8";
+	time.timeZone = "Europe/London";
 
 	users.users.emily = {
 		isNormalUser = true;

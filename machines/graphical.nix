@@ -67,12 +67,8 @@
 		pcscd.enable = true;
 	};
 
-	console.keyMap = "uk";
-	documentation.nixos.enable = false; 
-	i18n.defaultLocale = "en_GB.UTF-8";
 	networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 	security.rtkit.enable = true;
-	time.timeZone = "Europe/London";
 
 	programs = { 
 		steam.enable = true;
