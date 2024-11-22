@@ -21,9 +21,6 @@
 		};
 	};
 
-	users.users.root.initialHashedPassword = "$y$j9T$7Y8zcgUU47qagjVNTVPVH.$uYcBIfNpvQ/hG9uG3dRL4zH8gZKbPYrOcFXO4ZFuCu7";
-	users.users.emily.initialHashedPassword = "$y$j9T$7Y8zcgUU47qagjVNTVPVH.$uYcBIfNpvQ/hG9uG3dRL4zH8gZKbPYrOcFXO4ZFuCu7";
-
 	users.users.emily = {
 		isNormalUser = true;
 		extraGroups = [ "wheel" ];
