@@ -1,5 +1,11 @@
-{ ... }: {
-	nix.settings.experimental-features = [ "flakes" ];
+{ pkgs, ... }: {
+	nixpkgs.config.allowUnfree = true;
+
+	nix.settings = {
+		allowed-users = [ "@wheel" ];
+		auto-optimise-store = true;
+		experimental-features = [ "flakes" ];
+	};
 
 	boot = {
 		loader.systemd-boot = {
@@ -38,5 +44,7 @@
 		openssh.authorizedKeys.keys = [
 			"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICMFmGardIjKxRdrlDqUQtzSIBad+1PKbao4MWS/++AL"
 		];
+
+		packages = with pkgs; [ btop git ];
 	};
 }

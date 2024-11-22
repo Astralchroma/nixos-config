@@ -1,15 +1,10 @@
 { config, inputs, lib, modulesPath, pkgs, ... }: {
-	nixpkgs = {
-		config.allowUnfree = true;
-
-		overlays = [
-			(self: super: { git-of-theseus = super.callPackage ./packages/git-of-theseus.nix {}; })
-		];
-	};
+	nixpkgs.overlays = [
+		(self: super: { git-of-theseus = super.callPackage ./packages/git-of-theseus.nix {}; })
+	];
 	
 	nix = {
 		settings = {
-			auto-optimise-store = true;
 			experimental-features = [ "nix-command" ];
 			trusted-users = [ "@wheel" ];
 		};
@@ -89,11 +84,11 @@
 
 	users.users.emily = {
 		packages = with pkgs; with config.nur.repos; [
-			ags aseprite blockbench btop devenv direnv dunst fastfetch fd gamemode gamescope gimp
-			git git-of-theseus heroic hyprshot inkscape kitty libreoffice librewolf mangohud
-			nautilus ncdu nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol
-			playerctl prismlauncher qoi rclone renderdoc rsync smartmontools swaylock unzip vesktop
-			vlc vmtouch wget wine wine64 winetricks wofi xorg.xcursorthemes yubikey-manager zip
+			ags aseprite blockbench devenv direnv dunst fastfetch fd gamemode gamescope gimp
+			git-of-theseus heroic hyprshot inkscape kitty libreoffice librewolf mangohud nautilus ncdu
+			nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol playerctl prismlauncher
+			qoi rclone renderdoc rsync smartmontools swaylock unzip vesktop vlc vmtouch wget wine wine64
+			winetricks wofi xorg.xcursorthemes yubikey-manager zip
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
