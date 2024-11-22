@@ -42,5 +42,13 @@
 			];
 			specialArgs = { inherit inputs; };
 		};
+
+		nixosConfigurations.beryllium = nixpkgs.lib.nixosSystem {
+			system = "aarch64-linux";
+			modules = [
+				machines/global.nix
+				machines/beryllium.nix
+			];
+		};
 	};
 }

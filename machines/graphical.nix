@@ -1,9 +1,32 @@
 { config, inputs, lib, modulesPath, pkgs, ... }: {
-	nixpkgs.overlays = [
-		(self: super: {
-			git-of-theseus = super.callPackage ./packages/git-of-theseus.nix {};
-		})
-	];
+	nixpkgs = {
+		config.allowUnfree = true;
+
+		overlays = [
+			(self: super: { git-of-theseus = super.callPackage ./packages/git-of-theseus.nix {}; })
+		];
+	};
+	
+	nix = {
+		settings = {
+			auto-optimise-store = true;
+			experimental-features = [ "nix-command" "flakes" ];
+			trusted-users = [ "@wheel" ];
+		};
+
+		gc = {
+			automatic = true;
+			dates = "09:15";
+			options = "--delete-older-than 14d";
+		};
+	};
+
+	system.autoUpgrade = {
+		enable = true;
+		flake = inputs.self.outPath;
+		flags = [ "--upgrade-all" "--recreate-lock-file" "--verbose" "-L" ];
+		dates = "08:15";
+	};
 
 	hardware = {
 		graphics.extraPackages = [ pkgs.libGL ];
@@ -35,6 +58,8 @@
 			wayland.enable = true;
 		};
 
+		speechd.enable = lib.mkForce false; # Not blind, so don't need it lol
+
 		blueman.enable = true;
 		envfs.enable = true;
 		flatpak.enable = true;
@@ -42,7 +67,12 @@
 		pcscd.enable = true;
 	};
 
+	console.keyMap = "uk";
+	documentation.nixos.enable = false; 
+	i18n.defaultLocale = "en_GB.UTF-8";
+	networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 	security.rtkit.enable = true;
+	time.timeZone = "Europe/London";
 
 	programs = { 
 		steam.enable = true;
@@ -63,9 +93,11 @@
 
 	users.users.emily = {
 		packages = with pkgs; with config.nur.repos; [
-			ags aseprite blockbench dunst gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty libreoffice
-			librewolf mangohud nautilus nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol playerctl
-			prismlauncher qoi renderdoc swaylock vesktop vlc wine wine64 winetricks wofi xorg.xcursorthemes yubikey-manager
+			ags aseprite blockbench btop devenv direnv dunst fastfetch fd gamemode gamescope gimp
+			git git-of-theseus heroic hyprshot inkscape kitty libreoffice librewolf mangohud
+			nautilus ncdu nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol
+			playerctl prismlauncher qoi rclone renderdoc rsync smartmontools swaylock unzip vesktop
+			vlc vmtouch wget wine wine64 winetricks wofi xorg.xcursorthemes yubikey-manager zip
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
