@@ -23,16 +23,29 @@
 			options = [ "compress=lzo" "subvol=nix" ];
 		};
 
+		"/etc/persistent" = {
+			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
+			options = [ "subvol=etc/persistent" ];
+		};
+
 		"/etc/nixos" = {
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
-			fsType = "btrfs";
-			options = [ "compress=lzo" "subvol=etc/nixos" ];
+			options = [ "subvol=etc/nixos" ];
 		};
 	};
 
 	networking = {
 		useDHCP = true;
 		hostName = "beryllium";
+	};
+
+	environment.etc = {
+		"machine-id".source = "/etc/persistent/machine-id";
+
+		"ssh/ssh_host_rsa_key".source = "/etc/persistent/ssh_host_rsa_key";
+		"ssh/ssh_host_rsa_key.pub".source = "/etc/persistent/ssh_host_rsa_key.pub";
+		"ssh/ssh_host_ed25519_key".source = "/etc/persistent/ssh_host_ed25519_key";
+		"ssh/ssh_host_ed25519_key.pub".source = "/etc/persistent/ssh_host_ed25519_key.pub";
 	};
 
 	users = {
