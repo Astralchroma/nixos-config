@@ -49,8 +49,15 @@
 	};
 
 	networking = {
-		useDHCP = true;
 		hostName = "beryllium";
+
+		nftables.enable = true;
+		useDHCP = true;
+
+		firewall = {
+			allowedTCPPorts = [ 80 443 ];
+			allowedUDPPorts = [ 443 ];
+		};
 	};
 
 	environment.etc = {
