@@ -1,4 +1,4 @@
-{ modulesPath, pkgs, ... }: {
+{ config, modulesPath, pkgs, ... }: {
 	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
 	system.stateVersion = "25.05";
@@ -40,6 +40,11 @@
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
 			options = [ "subvol=srv" ];
 		};
+
+		"/var/lib/prometheus" = {
+			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
+			options = [ "subvol=srv/prometheus" ];
+		};
 	};
 
 	services.postgresql = {
@@ -57,6 +62,57 @@
 		];
 
 		ensureDatabases = [ "grafana" ];
+	};
+
+	services.prometheus = {
+		enable = true;
+
+		stateDir = "prometheus";
+
+		retentionTime = "100y"; # Basically forever!
+		globalConfig.scrape_interval = "5s"; # This is probably extremely overkill, will likely change it later.
+
+		scrapeConfigs = with config.services.prometheus.exporters; [
+			{
+				job_name = "node";
+				static_configs = [{ targets = [ "localhost:${toString node.port}" ]; }];
+			}
+			{
+				job_name = "postgres";
+				static_configs = [{ targets = [ "localhost:${toString postgres.port}" ]; }];
+			}
+			{
+				job_name = "process";
+				static_configs = [{ targets = [ "localhost:${toString process.port}" ]; }];
+			}
+		];
+
+		exporters = {
+			node.enable = true;
+			postgres.enable = true;
+
+			process = {
+				enable = true;
+
+				settings.process_names = [
+					{
+						name = "prometheus";
+						comm = [
+							"prometheus"
+							"postgres_export"
+							"node_exporter"
+							"process-exporte"
+						];
+					}
+
+					{ name = "caddy"; comm = [ "caddy" ]; }
+					{ name = "grafana"; comm = [ "grafana" ]; }
+					{ name = "postgres"; comm = [ "postgres" ]; }
+
+					{ name = "other"; cmdline = [ ".*" ]; }
+				];
+			};
+		};
 	};
 
 	services.grafana = {
