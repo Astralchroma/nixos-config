@@ -65,13 +65,27 @@
 		dataDir = "/srv/grafana";
 
 		settings = {
-			server.domain = "monitoring.astralchroma.dev";
+			server = {
+				domain = "monitoring.astralchroma.dev";
+				enforce_domain = true;
+			};
 
 			database = {
 				type = "postgres";
 				user = "grafana";
 				host = "/var/run/postgresql";
 			};
+
+			"auth.anonymous" = {
+				enabled = true;
+				hide_version = true;
+				org_name = "Astralchroma";
+			};
+
+			users.password_hint = "correct horse battery staple";
+
+			analytics.enabled = false;
+			news.news_feed_enabled = false;
 		};
 	};
 
