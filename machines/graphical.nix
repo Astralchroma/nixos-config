@@ -94,6 +94,7 @@
 				vscode = vscodium;
 				vscodeExtensions = with vscode-extensions; [
 					jnoortheen.nix-ide
+					matthewpi.caddyfile-support
 					mkhl.direnv
 					rust-lang.rust-analyzer
 					streetsidesoftware.code-spell-checker
