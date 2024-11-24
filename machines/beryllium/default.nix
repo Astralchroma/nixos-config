@@ -1,4 +1,4 @@
-{ modulesPath, ... }: {
+{ modulesPath, pkgs, ... }: {
 	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
 	system.stateVersion = "25.05";
@@ -42,10 +42,21 @@
 		};
 	};
 
-	services.caddy = {
+	services.postgresql = {
 		enable = true;
-		configFile = ./Caddyfile;
-		dataDir = "/srv/caddy";
+
+		package = pkgs.postgresql_17;
+		dataDir = "/srv/postgresql/17";
+
+		ensureUsers = [
+			{
+				name = "grafana";
+				ensureDBOwnership = true;
+				ensureClauses.login = true;
+			}
+		];
+
+		ensureDatabases = [ "grafana" ];
 	};
 
 	services.grafana = {
@@ -53,7 +64,21 @@
 
 		dataDir = "/srv/grafana";
 
-		settings.server.domain = "monitoring.astralchroma.dev";
+		settings = {
+			server.domain = "monitoring.astralchroma.dev";
+
+			database = {
+				type = "postgres";
+				user = "grafana";
+				host = "/var/run/postgresql";
+			};
+		};
+	};
+
+	services.caddy = {
+		enable = true;
+		configFile = ./Caddyfile;
+		dataDir = "/srv/caddy";
 	};
 
 	networking = {
