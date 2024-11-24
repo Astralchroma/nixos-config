@@ -47,7 +47,7 @@
 			system = "aarch64-linux";
 			modules = [
 				machines/global.nix
-				machines/beryllium.nix
+				machines/beryllium
 			];
 		};
 	};
