@@ -9,14 +9,13 @@
 		"/" = {
 			device = "tmpfs";
 			fsType = "tmpfs";
-			options = [ "mode=755" "noexec" ];
+			options = [ "mode=755" ];
 			neededForBoot = true;
 		};
 
 		"/boot" = {
 			device = "/dev/disk/by-uuid/4C51-A2F3";
 			fsType = "vfat";
-			options = [ "noexec" ];
 		};
 
 		"/nix" = {
@@ -28,18 +27,18 @@
 
 		"/etc/persistent" = {
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
-			options = [ "subvol=etc/persistent" "noexec" ];
+			options = [ "subvol=etc/persistent" ];
 			neededForBoot = true;
 		};
 
 		"/etc/nixos" = {
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
-			options = [ "subvol=etc/nixos" "noexec" ];
+			options = [ "subvol=etc/nixos" ];
 		};
 
 		"/srv" = {
 			device = "/dev/disk/by-uuid/71f5a4ef-0a0b-4574-ae9a-b7b006b0337d";
-			options = [ "subvol=srv" "noexec" ];
+			options = [ "subvol=srv" ];
 		};
 	};
 
