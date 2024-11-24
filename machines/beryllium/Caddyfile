@@ -12,7 +12,7 @@ https://www.astralchroma.dev {
 }
 
 https://monitoring.astralchroma.dev {
-	respond "Under Construction" 503
+	reverse_proxy http://localhost:3000
 }
 
 https://vpn.astralchroma.dev {

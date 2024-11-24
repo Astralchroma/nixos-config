@@ -48,6 +48,14 @@
 		dataDir = "/srv/caddy";
 	};
 
+	services.grafana = {
+		enable = true;
+
+		dataDir = "/srv/grafana";
+
+		settings.server.domain = "monitoring.astralchroma.dev";
+	};
+
 	networking = {
 		hostName = "beryllium";
 
