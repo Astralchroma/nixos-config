@@ -12,9 +12,9 @@
 			system = "x86_64-linux";
 			modules = [
 				nur.nixosModules.nur
-				./global.nix
-				./graphical.nix
-				./horizon.nix
+				machines/global.nix
+				machines/graphical.nix
+				machines/horizon.nix
 				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };

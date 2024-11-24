@@ -3,7 +3,7 @@
 
 	nixpkgs.overlays = [
 		(self: super: {
-			truckersmp-cli = super.callPackage ./packages/truckersmp-cli.nix {};
+			truckersmp-cli = super.callPackage ../packages/truckersmp-cli.nix {};
 		})
 	];
 
@@ -112,7 +112,7 @@
 		pkgs.rclone
 	];
 
-	age.secrets.rclone.file = ./secrets/rclone.conf.age;
+	age.secrets.rclone.file = ../secrets/rclone.conf.age;
 
 	systemd.services.rclone = {
 		enable = true;
