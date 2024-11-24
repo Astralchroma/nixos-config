@@ -43,6 +43,12 @@
 		};
 	};
 
+	services.caddy = {
+		enable = true;
+		configFile = ./Caddyfile;
+		dataDir = "/srv/caddy";
+	};
+
 	networking = {
 		useDHCP = true;
 		hostName = "beryllium";

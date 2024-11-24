@@ -1,0 +1,28 @@
+{
+	email astralchroma@proton.me
+}
+
+https://astralchroma.dev {
+	respond "Under Construction" 503
+}
+
+# We don't use `www.`, it looks silly. But some people use it, we'll redirect it so nothing breaks.
+https://www.astralchroma.dev {
+	redir https://astralchroma.dev{uri} permanent
+}
+
+https://monitoring.astralchroma.dev {
+	respond "Under Construction" 503
+}
+
+https://vpn.astralchroma.dev {
+	respond "Under Construction" 503
+}
+
+https://solarscape.astralchroma.dev {
+	respond "Under Construction" 503
+}
+
+https://solarscape-api.astralchroma.dev {
+	respond "Under Construction" 503
+}
