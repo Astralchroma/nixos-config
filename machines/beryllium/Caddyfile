@@ -26,3 +26,11 @@ https://solarscape.astralchroma.dev {
 https://solarscape-api.astralchroma.dev {
 	respond "Under Construction" 503
 }
+
+https://api.axolotlclient.com {
+	respond "Under Construction" 503
+}
+
+https://admin.axolotlclient.com {
+	respond "Under Construction" 503
+}
