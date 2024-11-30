@@ -9,7 +9,7 @@
 		initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 		kernelModules = [ "kvm-intel" ];
 
-		initrd.luks.devices.starship-decrypted.allowDiscards = true;
+		initrd.luks.devices.root-decrypted.allowDiscards = true;
 	};
 
 	fileSystems = {
@@ -18,7 +18,7 @@
 			fsType = "btrfs";
 			options = [ "compress=zstd:15" ];
 			encrypted = {
-				label = "starship-decrypted";
+				label = "root-decrypted";
 				enable = true;
 				blkDev = "/dev/disk/by-uuid/6c57d84e-2440-4237-96ee-f51d291b1cbd";
 			};

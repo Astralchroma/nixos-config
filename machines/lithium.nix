@@ -18,7 +18,7 @@
 			availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 			kernelModules = [ "dm_cache_default" ];
 
-			luks.devices.horizon-decrypted.allowDiscards = true;
+			luks.devices.root-decrypted.allowDiscards = true;
 		};
 
 		kernelModules = [ "kvm-amd" ];
@@ -40,7 +40,7 @@
 			fsType = "btrfs";
 			options = [ "compress=zstd:15" ];
 			encrypted = {
-				label = "horizon-decrypted";
+				label = "root-decrypted";
 				enable = true;
 				blkDev = "/dev/disk/by-uuid/f5c01197-f3cf-415e-a41f-85397a445bd4";
 			};

@@ -8,31 +8,31 @@
 	};
 
 	outputs = inputs@{ self, agenix, ags, axolotlClientApi, nixpkgs, nur }: {
-		nixosConfigurations.horizon = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.lithium = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				nur.nixosModules.nur
 				machines/global.nix
 				machines/graphical.nix
-				machines/horizon.nix
+				machines/lithium.nix
 				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
 		};
 
-		nixosConfigurations.starship = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.helium = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				nur.nixosModules.nur
 				machines/global.nix
 				machines/graphical.nix
-				machines/starship.nix
+				machines/helium.nix
 				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
 		};
 
-		nixosConfigurations.outpost = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.beryllium-old = nixpkgs.lib.nixosSystem {
 			system = "aarch64-linux";
 			modules = [
 				axolotlClientApi.nixosModules.default
