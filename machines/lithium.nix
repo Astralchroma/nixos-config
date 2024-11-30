@@ -1,12 +1,6 @@
 { config, inputs, lib, modulesPath, pkgs, ... }: {
 	imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-	nixpkgs.overlays = [
-		(self: super: {
-			truckersmp-cli = super.callPackage ../packages/truckersmp-cli.nix {};
-		})
-	];
-
 	system.stateVersion = "24.05";
 
 	hardware.cpu.amd.updateMicrocode = true;
@@ -132,5 +126,5 @@
 		};
 	};
 
-	users.users.emily.packages = with pkgs; [ nvtopPackages.amd truckersmp-cli ];
+	users.users.emily.packages = [ pkgs.nvtopPackages.amd config.nur.repos.iuricarras.truckersmp-cli ];
 }
