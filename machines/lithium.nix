@@ -73,7 +73,17 @@
 			prefixLength = 16;
 		}];
 
-		firewall.allowedTCPPorts = [ 8096 ];
+		firewall = {
+			allowedTCPPorts = [
+				8096 # Jellyfin
+				22000 # Syncthing
+			];
+			
+			allowedUDPPorts = [
+				21027 # Syncthing
+				22000 # Syncthing
+			];
+		};
 	};
 
 	services = {
