@@ -78,7 +78,7 @@
 				8096 # Jellyfin
 				22000 # Syncthing
 			];
-			
+
 			allowedUDPPorts = [
 				21027 # Syncthing
 				22000 # Syncthing
@@ -111,6 +111,11 @@
 		tailscale.enable = true;
 	};
 
+	systemd.targets.sleep.enable = lib.mkForce false;
+	systemd.targets.suspend.enable = lib.mkForce false;
+	systemd.targets.hibernate.enable = lib.mkForce false;
+	systemd.targets.hybrid-sleep.enable = lib.mkForce false;
+	
 	environment.systemPackages = [
 		inputs.agenix.packages."${pkgs.system}".default
 		pkgs.rclone
