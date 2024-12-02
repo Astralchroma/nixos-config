@@ -1,27 +1,7 @@
-{ config, inputs, lib, modulesPath, pkgs, ... }: {
+{ config, lib, modulesPath, pkgs, ... }: {
 	nixpkgs.overlays = [
 		(self: super: { git-of-theseus = super.callPackage ../packages/git-of-theseus.nix {}; })
 	];
-	
-	nix = {
-		settings = {
-			experimental-features = [ "nix-command" ];
-			trusted-users = [ "@wheel" ];
-		};
-
-		gc = {
-			automatic = true;
-			dates = "09:15";
-			options = "--delete-older-than 14d";
-		};
-	};
-
-	system.autoUpgrade = {
-		enable = true;
-		flake = inputs.self.outPath;
-		flags = [ "--upgrade-all" "--recreate-lock-file" "--verbose" "-L" ];
-		dates = "08:15";
-	};
 
 	hardware = {
 		graphics.extraPackages = [ pkgs.libGL ];
