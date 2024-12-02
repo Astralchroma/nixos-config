@@ -13,6 +13,8 @@
 			kernelModules = [ "dm_cache_default" ];
 
 			luks.devices.root-decrypted.allowDiscards = true;
+
+			services.bcache.enable = true;
 		};
 
 		kernelModules = [ "kvm-amd" ];
@@ -26,6 +28,8 @@
 				printf "\033[1;31mMountpoint /boot2 does not exist! EFI System Partition will not be redundant!\033[0m\n"
 			fi
 		'';
+
+		bcache.enable = true;
 	};
 
 	fileSystems = {
