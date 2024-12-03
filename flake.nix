@@ -47,8 +47,9 @@
 			system = "aarch64-linux";
 			modules = [
 				machines/all.nix
-				machines/beryllium.nix
+				machines/beryllium
 			];
+			specialArgs = { inherit inputs; };
 		};
 	};
 }

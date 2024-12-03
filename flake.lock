@@ -66,11 +66,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1732702212,
-        "narHash": "sha256-GKdPe47/Vi1CvMYSR6V51cGUywQUk6ldI94snUYCGII=",
+        "lastModified": 1733228139,
+        "narHash": "sha256-zQ9pa8PtwCsryXEd7yEx/ypCeO2xtkHkA2V64RN8OQ4=",
         "owner": "AxolotlClient",
         "repo": "AxolotlClient-API",
-        "rev": "a5f37389b386cbe5cb61fa980ab416d268d84544",
+        "rev": "e1fb37ba0a7cbfdb59ab62b895839d02db3792f6",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1733156167,
-        "narHash": "sha256-f8SqvJxn+1JnraMjY8wiH8iEbiDJY5u8mj5RAI21poQ=",
+        "lastModified": 1733215745,
+        "narHash": "sha256-RIlhnKlObJ1sEdzBP6Nuy4jLUiQnmWWXVsRHRbv6SzY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "d16ebc0f37506eb6a382ed415aa91965ad590358",
+        "rev": "251d756a74e67bda25d89327b01a3da19dddabae",
         "type": "github"
       },
       "original": {
