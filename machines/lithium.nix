@@ -10,11 +10,17 @@
 
 		initrd = {
 			availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-			kernelModules = [ "dm_cache_default" ];
-
-			luks.devices.root-decrypted.allowDiscards = true;
+			kernelModules = [ "bcache" ];
 
 			services.bcache.enable = true;
+
+			luks.devices.lithium = {
+				device = "/dev/disk/by-uuid/63a975e1-85cd-4e95-a04f-b2be3e026c27";
+
+				tryEmptyPassphrase = true;
+				allowDiscards = true;
+				bypassWorkqueues = true;
+			};
 		};
 
 		kernelModules = [ "kvm-amd" ];
@@ -34,24 +40,19 @@
 
 	fileSystems = {
 		"/" = {
-			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
+			device = "/dev/mapper/lithium";
 			fsType = "btrfs";
 			options = [ "compress=zstd:15" ];
-			encrypted = {
-				label = "root-decrypted";
-				enable = true;
-				blkDev = "/dev/disk/by-uuid/f5c01197-f3cf-415e-a41f-85397a445bd4";
-			};
 		};
 
 		"/media/Data" = {
-			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
+			device = "/dev/mapper/lithium";
 			fsType = "btrfs";
 			options = [ "subvol=/data" ];
 		};
 
 		"/media/Library" = {
-			device = "/dev/disk/by-uuid/73413d9a-cbb1-45f4-8090-b0f77fbb6d19";
+			device = "/dev/mapper/lithium";
 			fsType = "btrfs";
 			options = [ "subvol=/library" ];
 		};
