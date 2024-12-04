@@ -69,7 +69,7 @@
 	};
 
 	networking = {
-		hostName = "horizon";
+		hostName = "lithium";
 		defaultGateway = "192.168.1.254";
 		useDHCP = false;
 

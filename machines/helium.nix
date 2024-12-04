@@ -38,6 +38,7 @@
 	];
 
 	networking = {
+		hostName = "helium";
 		useDHCP = true;
 
 		networkmanager.enable = true;
