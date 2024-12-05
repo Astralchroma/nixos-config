@@ -32,17 +32,6 @@
 			specialArgs = { inherit inputs; };
 		};
 
-		nixosConfigurations.beryllium-old = nixpkgs.lib.nixosSystem {
-			system = "aarch64-linux";
-			modules = [
-				axolotlClientApi.nixosModules.default
-				machines/all.nix
-				machines/beryllium-old.nix
-				agenix.nixosModules.default
-			];
-			specialArgs = { inherit inputs; };
-		};
-
 		nixosConfigurations.beryllium = nixpkgs.lib.nixosSystem {
 			system = "aarch64-linux";
 			modules = [

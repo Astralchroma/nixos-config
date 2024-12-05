@@ -5,37 +5,6 @@
 		})
 	];
 
-	imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
-
-	system.stateVersion = "24.11";
-
-	boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_scsi" ];
-
-	fileSystems = {
-		"/" = {
-			device = "/dev/disk/by-uuid/0a2e0044-98e6-43c7-9900-d1885b1bd4d0";
-			fsType = "btrfs";
-			options = [ "compress=lzo" ];
-		};
-
-		"/srv" = {
-			device = "/dev/disk/by-uuid/0a2e0044-98e6-43c7-9900-d1885b1bd4d0";
-			fsType = "btrfs";
-			options = [ "subvol=/Server" ];
-		};
-
-		"/boot" = {
-			device = "/dev/disk/by-uuid/E625-43E4";
-			fsType = "vfat";
-		};
-	};
-
-	networking = {
-		hostName = "outpost";
-		useDHCP = true;
-		firewall.allowedTCPPorts = [ 80 443 ];
-	};
-
 	containers.mongo = {
 		autoStart = true;
 
@@ -113,31 +82,15 @@
 				email = "astralchroma@proton.me";
 
 				virtualHosts."https://astralchroma.dev".extraConfig = ''
-					@stripExtensions path_regexp strip (.*)\.(html)
-					redir @stripExtensions {re.strip.1} permanent
-					redir /index / permanent
-
-					redir /discord https://discord.gg/abSHWeTgPX permanent
-
 					root * /srv/
 
 					file_server {
 						hide /srv/.git/
 					}
-
-					try_files {path} {path}/ {path}.html
-				'';
-
-				virtualHosts."https://www.astralchroma.dev".extraConfig = ''
-					redir https://astralchroma.dev{uri} permanent
 				'';
 
 				virtualHosts."https://tailscale.astralchroma.dev".extraConfig = ''
 					reverse_proxy http://localhost:8080
-				'';
-
-				virtualHosts."https://gateway.astralchroma.dev".extraConfig = ''
-					reverse_proxy http://100.64.0.1:8096
 				'';
 
 				# Fuck you cloudflare, let me use subsubdomains damn it
@@ -146,16 +99,6 @@
 					handle_path /dev/* {
 						reverse_proxy http://localhost:8000
 					}
-				'';
-
-				virtualHosts."https://solarscape.astralchroma.dev".extraConfig = ''
-					redir /discord https://astralchroma.dev/discord permanent
-
-					redir / https://github.com/Astralchroma/Solarscape temporary
-					redir /index https://github.com/Astralchroma/Solarscape temporary
-					redir /index.html https://github.com/Astralchroma/Solarscape temporary
-
-					respond "Not Found" 404
 				'';
 
 				# Fuck you cloudflare, let me use subsubdomains damn it
@@ -201,13 +144,6 @@
 
 	services = {
 		tailscale.enable = true;
-
-		postgresql = {
-			enable = true;
-			package = pkgs.postgresql_16;
-			dataDir = "/srv/postgresql16";
-			authentication = "local all emily peer";
-		};
 
 		axolotlClientApi = {
 			enable = true;
@@ -275,5 +211,4 @@
 		};
 	};
 
-	users.users.emily.packages = [ pkgs.mongosh ];
 }
