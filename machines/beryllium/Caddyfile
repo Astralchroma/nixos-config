@@ -2,7 +2,20 @@
 	email astralchroma@proton.me
 }
 
+(html) {
+	@stripExtensions path_regexp strip (.*)\.(html)
+	redir @stripExtensions {re.strip.1} permanent
+
+	redir /index / permanent
+
+	try_files {path} {path}/ {path}.html
+}
+
 https://astralchroma.dev {
+	import html
+
+	redir /discord https://discord.gg/abSHWeTgPX permanent
+
 	respond "Under Construction" 503
 }
 
@@ -12,6 +25,8 @@ https://www.astralchroma.dev {
 }
 
 https://monitoring.astralchroma.dev {
+	import html
+
 	reverse_proxy http://localhost:3000
 }
 
@@ -20,7 +35,12 @@ https://vpn.astralchroma.dev {
 }
 
 https://solarscape.astralchroma.dev {
-	respond "Under Construction" 503
+	import html
+
+	redir /discord https://astralchroma.dev/discord permanent
+	redir / https://github.com/Astralchroma/Solarscape temporary
+
+	respond "404 Not Found"
 }
 
 https://solarscape-api.astralchroma.dev {
@@ -32,5 +52,7 @@ https://api.axolotlclient.com {
 }
 
 https://admin.axolotlclient.com {
+	import html
+
 	respond "Under Construction" 503
 }
