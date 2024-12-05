@@ -64,6 +64,12 @@
 		ensureDatabases = [ "grafana" ];
 	};
 
+	services.mongodb = {
+		enable = true;
+		package = pkgs.mongodb-ce;
+		dbpath = "/srv/mongodb";
+	};
+
 	services.prometheus = {
 		enable = true;
 
@@ -107,6 +113,7 @@
 
 					{ name = "caddy"; comm = [ "caddy" ]; }
 					{ name = "grafana"; comm = [ "grafana" ]; }
+					{ name = "mongod"; comm = [ "mongod" ]; }
 					{ name = "postgres"; comm = [ "postgres" ]; }
 
 					{ name = "other"; cmdline = [ ".*" ]; }
@@ -177,5 +184,7 @@
 
 		users.root.initialHashedPassword = "$y$j9T$7Y8zcgUU47qagjVNTVPVH.$uYcBIfNpvQ/hG9uG3dRL4zH8gZKbPYrOcFXO4ZFuCu7";
 		users.emily.initialHashedPassword = "$y$j9T$7Y8zcgUU47qagjVNTVPVH.$uYcBIfNpvQ/hG9uG3dRL4zH8gZKbPYrOcFXO4ZFuCu7";
+
+		users.emily.packages = [ pkgs.mongosh ];
 	};
 }
