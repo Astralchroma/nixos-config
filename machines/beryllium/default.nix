@@ -55,13 +55,18 @@
 
 		ensureUsers = [
 			{
+				name = "axolotl_client-api";
+				ensureDBOwnership = true;
+				ensureClauses.login = true;
+			}
+			{
 				name = "grafana";
 				ensureDBOwnership = true;
 				ensureClauses.login = true;
 			}
 		];
 
-		ensureDatabases = [ "grafana" ];
+		ensureDatabases = [ "axolotl_client-api" "grafana" ];
 	};
 
 	services.mongodb = {
@@ -115,6 +120,7 @@
 					{ name = "grafana"; comm = [ "grafana" ]; }
 					{ name = "mongod"; comm = [ "mongod" ]; }
 					{ name = "postgres"; comm = [ "postgres" ]; }
+					{ name = "axolotl_client-api"; comm = [ "axolotl_client-" ]; }
 
 					{ name = "other"; cmdline = [ ".*" ]; }
 				];
@@ -150,6 +156,18 @@
 			analytics.enabled = false;
 			news.news_feed_enabled = false;
 		};
+	};
+
+	age.secrets.axolotlClientApiHypixelApiKey = {
+		file = ../../secrets/axolotl_client-api-hypixel-api-key.age;
+		owner = "axolotl_client-api";
+		group = "axolotl_client-api";
+	};
+
+	services.axolotlClientApi = {
+		enable = true;
+		postgresUrl = "postgres:///axolotl_client-api";
+		hypixelApiKeyFile = config.age.secrets.axolotlClientApiHypixelApiKey.path;
 	};
 
 	services.caddy = {

@@ -40,7 +40,7 @@ https://solarscape.astralchroma.dev {
 	redir /discord https://astralchroma.dev/discord permanent
 	redir / https://github.com/Astralchroma/Solarscape temporary
 
-	respond "404 Not Found"
+	respond "Not Found" 404
 }
 
 https://solarscape-api.astralchroma.dev {
@@ -48,7 +48,11 @@ https://solarscape-api.astralchroma.dev {
 }
 
 https://api.axolotlclient.com {
-	respond "Under Construction" 503
+	handle_path /v1/* {
+		reverse_proxy localhost:8000
+	}
+
+	respond "Not Found" 404
 }
 
 https://admin.axolotlclient.com {

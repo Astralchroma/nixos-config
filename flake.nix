@@ -35,8 +35,10 @@
 		nixosConfigurations.beryllium = nixpkgs.lib.nixosSystem {
 			system = "aarch64-linux";
 			modules = [
+				axolotlClientApi.nixosModules.default
 				machines/all.nix
 				machines/beryllium
+				agenix.nixosModules.default
 			];
 			specialArgs = { inherit inputs; };
 		};
