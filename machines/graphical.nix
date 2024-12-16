@@ -64,11 +64,12 @@
 
 	users.users.emily = {
 		packages = with pkgs; with nur.repos; [
-			ags aseprite blockbench devenv direnv dunst fastfetch fd gamemode gamescope gimp
-			git-of-theseus heroic hyprshot inkscape kitty libreoffice librewolf mangohud nautilus ncdu
-			nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol playerctl prismlauncher
-			qoi rclone renderdoc rsync smartmontools swaylock unzip vesktop vlc vmtouch wget wine wine64
-			winetricks wofi xorg.xcursorthemes yubikey-manager zip
+			activitywatch ags aseprite aw-watcher-window-wayland blockbench devenv direnv dunst
+			fastfetch fd gamemode gamescope gimp git-of-theseus heroic hyprshot inkscape kitty
+			libreoffice librewolf mangohud nautilus ncdu nltch.spotify-adblock obs-studio obsidian
+			onefetch oxipng pavucontrol playerctl prismlauncher qoi rclone renderdoc rsync
+			smartmontools swaylock unzip vesktop vlc vmtouch wget wine wine64 winetricks wofi
+			xorg.xcursorthemes yubikey-manager zip
 
 			(vscode-with-extensions.override {
 				vscode = vscodium;
@@ -86,6 +87,12 @@
 						publisher = "PolyMeilex";
 						version = "0.1.17";
 						sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
+					}
+					{
+						name = "aw-watcher-vscode";
+						publisher = "activitywatch";
+						version = "0.5.0";
+						sha256 = "sha256-OrdIhgNXpEbLXYVJAx/jpt2c6Qa5jf8FNxqrbu5FfFs=";
 					}
 				];
 			})
