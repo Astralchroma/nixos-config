@@ -11,7 +11,7 @@
 		nixosConfigurations.helium = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
-				nur.nixosModules.nur
+				nur.modules.nixos.default
 				machines/all.nix
 				machines/graphical.nix
 				machines/helium.nix
@@ -23,7 +23,7 @@
 		nixosConfigurations.lithium = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
-				nur.nixosModules.nur
+				nur.modules.nixos.default
 				machines/all.nix
 				machines/graphical.nix
 				machines/lithium.nix

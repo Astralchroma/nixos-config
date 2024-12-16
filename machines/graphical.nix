@@ -63,7 +63,7 @@
 	};
 
 	users.users.emily = {
-		packages = with pkgs; with config.nur.repos; [
+		packages = with pkgs; with nur.repos; [
 			ags aseprite blockbench devenv direnv dunst fastfetch fd gamemode gamescope gimp
 			git-of-theseus heroic hyprshot inkscape kitty libreoffice librewolf mangohud nautilus ncdu
 			nltch.spotify-adblock obs-studio obsidian onefetch oxipng pavucontrol playerctl prismlauncher
