@@ -83,16 +83,22 @@
 					vadimcn.vscode-lldb
 				] ++ vscode-utils.extensionsFromVscodeMarketplace [
 					{
-						name = "wgsl";
-						publisher = "PolyMeilex";
-						version = "0.1.17";
-						sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
-					}
-					{
 						name = "aw-watcher-vscode";
 						publisher = "activitywatch";
 						version = "0.5.0";
 						sha256 = "sha256-OrdIhgNXpEbLXYVJAx/jpt2c6Qa5jf8FNxqrbu5FfFs=";
+					}
+					{
+						name = "HOCON";
+						publisher = "sabieber";
+						version = "0.0.1";
+						sha256 = "sha256-m63dWOJF2syRpfImyVXek6XLGb/DdJtYZ4p03eeR/lU=";
+					}
+					{
+						name = "wgsl";
+						publisher = "PolyMeilex";
+						version = "0.1.17";
+						sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
 					}
 				];
 			})
