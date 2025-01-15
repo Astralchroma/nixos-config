@@ -42,6 +42,11 @@
 		pcscd.enable = true;
 	};
 
+	virtualisation.docker.rootless = {
+		enable = true;
+		setSocketVariable = true;
+	};
+
 	networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 	security.rtkit.enable = true;
 
