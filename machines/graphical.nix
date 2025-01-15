@@ -54,6 +54,10 @@
 		steam.enable = true;
 		gnupg.agent.enable = true;
 		hyprland.enable = true;
+		java = {
+			enable = true;
+			package = pkgs.temurin-bin;
+		};
 	};
 
 	xdg.portal = {
@@ -108,5 +112,10 @@
 				];
 			})
 		];
+	};
+
+	environment.variables = with pkgs; {
+		JDK17 = "${openjdk17-bootstrap}";
+		JDK21 = "${temurin-bin}";
 	};
 }
