@@ -69,11 +69,14 @@
 		ensureDatabases = [ "axolotl_client-api" "grafana" ];
 	};
 
+	# Disable mongodb for now as it's causing problems and nothing is actually using it
+	/*
 	services.mongodb = {
 		enable = true;
 		package = pkgs.mongodb-ce;
 		dbpath = "/srv/mongodb";
 	};
+	*/
 
 	services.prometheus = {
 		enable = true;
