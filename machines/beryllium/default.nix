@@ -179,6 +179,15 @@
 		dataDir = "/srv/caddy";
 	};
 
+	services.kubernetes = {
+		apiserver.enable = true;
+		controllerManager.enable = true;
+		scheduler.enable = true;
+		addonManager.enable = true;
+		proxy.enable = true;
+		flannel.enable = true;
+	};
+
 	networking = {
 		hostName = "beryllium";
 
