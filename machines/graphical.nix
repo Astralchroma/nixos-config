@@ -86,6 +86,7 @@
 					jnoortheen.nix-ide
 					matthewpi.caddyfile-support
 					mkhl.direnv
+					ms-vscode.hexeditor
 					rust-lang.rust-analyzer
 					streetsidesoftware.code-spell-checker
 					tamasfe.even-better-toml
